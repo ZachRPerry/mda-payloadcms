@@ -1,13 +1,8 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
 import Link from 'next/link'
-import type { Header as HeaderType } from '@/payload-types'
+import { getHeader } from '@/lib/cms'
 
 export default async function Header() {
-  const payload = await getPayload({ config })
-  const header = (await payload.findGlobal({
-    slug: 'header',
-  })) as HeaderType
+  const header = await getHeader()
 
   return (
     <header className="site-header">

@@ -1,12 +1,7 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
-import type { Footer as FooterType } from '@/payload-types'
+import { getFooter } from '@/lib/cms'
 
 export default async function Footer() {
-  const payload = await getPayload({ config })
-  const footer = (await payload.findGlobal({
-    slug: 'footer',
-  })) as FooterType
+  const footer = await getFooter()
 
   return (
     <footer className="site-footer">

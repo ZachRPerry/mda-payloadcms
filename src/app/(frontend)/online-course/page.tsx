@@ -1,12 +1,7 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
-import type { OnlinePartnership as OnlinePartnershipType } from '@/payload-types'
+import { getOnlinePartnership } from '@/lib/cms'
 
 export default async function OnlineCoursePage() {
-  const payload = await getPayload({ config })
-  const partnershipData = (await payload.findGlobal({
-    slug: 'online-partnership',
-  })) as OnlinePartnershipType
+  const partnershipData = await getOnlinePartnership()
 
   return (
     <div className="online-course-page">

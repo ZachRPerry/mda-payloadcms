@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { triggerRevalidate } from '../hooks/revalidateTags'
 
 export const OnlinePartnership: GlobalConfig = {
   slug: 'online-partnership',
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [({ req }) => triggerRevalidate(['online-partnership'], req)],
   },
   fields: [
     {

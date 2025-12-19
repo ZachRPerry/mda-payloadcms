@@ -1,18 +1,7 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
+import { getOpenClasses } from '@/lib/cms'
 
 export default async function SchedulePage() {
-  const payload = await getPayload({ config })
-
-  const { docs: classes } = await payload.find({
-    collection: 'classes',
-    where: {
-      status: { equals: 'open' },
-      startDate: { greater_than: new Date().toISOString() },
-    },
-    sort: 'startDate',
-    limit: 50,
-  })
+  const classes = await getOpenClasses()
 
   return (
     <div className="schedule-page">

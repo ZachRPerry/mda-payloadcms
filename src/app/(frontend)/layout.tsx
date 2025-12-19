@@ -3,9 +3,6 @@ import './styles.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-
 export const metadata = {
   description: 'Myers Driving Academy - Helping Ohio Teens Become Safe, Confident Drivers',
   title: 'Myers Driving Academy',

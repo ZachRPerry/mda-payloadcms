@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { triggerRevalidate } from '../hooks/revalidateTags'
 
 export const Header: GlobalConfig = {
   slug: 'header',
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [({ req }) => triggerRevalidate(['header'], req)],
   },
   fields: [
     {

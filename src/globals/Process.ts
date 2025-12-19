@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { triggerRevalidate } from '../hooks/revalidateTags'
 
 export const Process: GlobalConfig = {
   slug: 'process',
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [({ req }) => triggerRevalidate(['process'], req)],
   },
   fields: [
     {

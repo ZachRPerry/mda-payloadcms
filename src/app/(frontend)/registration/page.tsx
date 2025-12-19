@@ -1,12 +1,7 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
-import type { Registration as RegistrationType } from '@/payload-types'
+import { getRegistration } from '@/lib/cms'
 
 export default async function RegistrationPage() {
-  const payload = await getPayload({ config })
-  const registrationData = (await payload.findGlobal({
-    slug: 'registration',
-  })) as RegistrationType
+  const registrationData = await getRegistration()
 
   return (
     <div className="registration-page">

@@ -4,6 +4,20 @@
 
 After the application is running, you'll need to configure the CMS content through the admin panel.
 
+### Environment Variables (local and Vercel)
+
+```
+MONGODB_URI=your_mongodb_connection_string
+PAYLOAD_SECRET=your_secure_random_secret
+NEXT_PUBLIC_SERVER_URL=https://your-app.vercel.app
+REVALIDATE_TOKEN=strong-random-token-for-on-demand-revalidation
+BLOB_READ_WRITE_TOKEN=vercel-generated-token
+```
+
+- `MONGODB_URI` (or `DATABASE_URI` fallback) points to your MongoDB/Atlas cluster
+- `REVALIDATE_TOKEN` secures `/api/revalidate` which hooks call to refresh cached content
+- `BLOB_READ_WRITE_TOKEN` is provided by Vercel Blob (used for media storage)
+
 ### Access the Admin Panel
 
 1. Start the development server: `npm run dev`

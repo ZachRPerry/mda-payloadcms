@@ -25,30 +25,47 @@ A modern, content-managed website for Myers Driving Academy built with [Payload 
 
 ### Prerequisites
 
-- Node.js 18+ and npm (or pnpm)
-- MongoDB database (local or cloud)
+- Node.js 18+
+- npm (included with Node)
+- MongoDB database (local or cloud/Atlas)
 
 ### Installation
 
 ```bash
 # Install dependencies
-pnpm install
+npm install
 
 # Set up environment variables
 cp .env.example .env
 # Edit .env with your MongoDB URI and Payload secret
 
 # Generate TypeScript types
-pnpm run generate:types
+npm run generate:types
 
 # Seed initial data (optional)
-pnpm run seed
+npm run seed
 
 # Start development server
-pnpm dev
+npm run dev
 ```
 
 Visit `http://localhost:3000` to see the site and `http://localhost:3000/admin` to access the CMS admin panel.
+
+### Environment Variables
+
+Set these in `.env` (locally) and in Vercel Project Settings → Environment Variables:
+
+```
+MONGODB_URI=your_mongodb_connection_string
+PAYLOAD_SECRET=your_secure_random_secret
+NEXT_PUBLIC_SERVER_URL=https://your-app.vercel.app
+REVALIDATE_TOKEN=strong-random-token-for-on-demand-revalidation
+BLOB_READ_WRITE_TOKEN=vercel-generated-token
+```
+
+- `MONGODB_URI` is preferred; falls back to `DATABASE_URI` if set.
+- `BLOB_READ_WRITE_TOKEN` is auto-created by Vercel Blob; copy from Vercel.
+- `REVALIDATE_TOKEN` secures `/api/revalidate` used by CMS hooks to invalidate cached content.
 
 ## Initial Setup
 

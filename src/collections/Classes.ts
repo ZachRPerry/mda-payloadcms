@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { triggerRevalidate } from '../hooks/revalidateTags'
 
 export const Classes: CollectionConfig = {
   slug: 'classes',
@@ -79,4 +80,8 @@ export const Classes: CollectionConfig = {
     },
   ],
   timestamps: true,
+  hooks: {
+    afterChange: [({ req }) => triggerRevalidate(['classes'], req)],
+    afterDelete: [({ req }) => triggerRevalidate(['classes'], req)],
+  },
 }
