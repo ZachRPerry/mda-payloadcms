@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    classes: Class;
+    'contact-submissions': ContactSubmission;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +80,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    classes: ClassesSelect<false> | ClassesSelect<true>;
+    'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -87,8 +91,20 @@ export interface Config {
     defaultIDType: string;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    header: Header;
+    footer: Footer;
+    process: Process;
+    registration: Registration;
+    'online-partnership': OnlinePartnership;
+  };
+  globalsSelect: {
+    header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    process: ProcessSelect<false> | ProcessSelect<true>;
+    registration: RegistrationSelect<false> | RegistrationSelect<true>;
+    'online-partnership': OnlinePartnershipSelect<false> | OnlinePartnershipSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -161,6 +177,45 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "classes".
+ */
+export interface Class {
+  id: string;
+  title: string;
+  startDate: string;
+  endDate: string;
+  /**
+   * e.g., "Monday - Thursday 5:30 PM - 9:30 PM"
+   */
+  schedule: string;
+  totalSeats: number;
+  price: number;
+  status: 'open' | 'full' | 'cancelled' | 'completed';
+  description?: string | null;
+  /**
+   * Additional notes or requirements for this class
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions".
+ */
+export interface ContactSubmission {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string | null;
+  subject: string;
+  message: string;
+  status?: ('new' | 'in-progress' | 'resolved') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -190,6 +245,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'classes';
+        value: string | Class;
+      } | null)
+    | ({
+        relationTo: 'contact-submissions';
+        value: string | ContactSubmission;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -275,6 +338,37 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "classes_select".
+ */
+export interface ClassesSelect<T extends boolean = true> {
+  title?: T;
+  startDate?: T;
+  endDate?: T;
+  schedule?: T;
+  totalSeats?: T;
+  price?: T;
+  status?: T;
+  description?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions_select".
+ */
+export interface ContactSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  subject?: T;
+  message?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -312,6 +406,248 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: string;
+  logo?: (string | null) | Media;
+  navigation: {
+    label: string;
+    link: string;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  companyName: string;
+  address?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  socialLinks?:
+    | {
+        platform: 'Facebook' | 'Twitter' | 'Instagram' | 'LinkedIn';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  copyrightText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "process".
+ */
+export interface Process {
+  id: string;
+  heroTitle: string;
+  heroDescription?: string | null;
+  /**
+   * Steps for the in-person classroom path
+   */
+  inPersonSteps?:
+    | {
+        stepNumber: number;
+        title: string;
+        description: string;
+        icon?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Steps for the online course path
+   */
+  onlineSteps?:
+    | {
+        stepNumber: number;
+        title: string;
+        description: string;
+        icon?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  additionalInfo?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "registration".
+ */
+export interface Registration {
+  id: string;
+  pageTitle: string;
+  pageDescription?: string | null;
+  classRegistrationForm: {
+    title: string;
+    description: string;
+    formFile?: (string | null) | Media;
+  };
+  behindTheWheelForm: {
+    title: string;
+    description: string;
+    formFile?: (string | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "online-partnership".
+ */
+export interface OnlinePartnership {
+  id: string;
+  pageTitle: string;
+  partnerName: string;
+  partnerLink: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  ctaButtonText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
+  navigation?:
+    | T
+    | {
+        label?: T;
+        link?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  companyName?: T;
+  address?: T;
+  phone?: T;
+  email?: T;
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  copyrightText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "process_select".
+ */
+export interface ProcessSelect<T extends boolean = true> {
+  heroTitle?: T;
+  heroDescription?: T;
+  inPersonSteps?:
+    | T
+    | {
+        stepNumber?: T;
+        title?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
+  onlineSteps?:
+    | T
+    | {
+        stepNumber?: T;
+        title?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
+  additionalInfo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "registration_select".
+ */
+export interface RegistrationSelect<T extends boolean = true> {
+  pageTitle?: T;
+  pageDescription?: T;
+  classRegistrationForm?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        formFile?: T;
+      };
+  behindTheWheelForm?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        formFile?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "online-partnership_select".
+ */
+export interface OnlinePartnershipSelect<T extends boolean = true> {
+  pageTitle?: T;
+  partnerName?: T;
+  partnerLink?: T;
+  description?: T;
+  ctaButtonText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

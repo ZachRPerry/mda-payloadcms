@@ -1,28 +1,58 @@
-# Payload Blank Template
+# Myers Driving Academy Website
 
-This template comes configured with the bare minimum to get started on anything you need.
+A modern, content-managed website for Myers Driving Academy built with [Payload CMS](https://payloadcms.com) and Next.js.
 
-## Quick start
+## Features
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+- 🎨 Purple and white branded design matching the Myers Driving Academy style
+- 📅 Class schedule management with real-time availability tracking
+- 📝 Downloadable registration forms
+- 🤝 Online course partnership integration (Aceable Inc)
+- 📧 Contact form with submission management
+- 🔧 Fully configurable through the CMS admin panel
+- 📱 Responsive design for mobile and desktop
 
-## Quick Start - local setup
+## Pages
 
-To spin up this template locally, follow these steps:
+- **Home** - Hero section with service overview
+- **Schedule** - Upcoming in-person driver education classes
+- **How It Works** - Step-by-step process information
+- **Online Course** - Aceable partnership information
+- **Registration** - Downloadable registration forms
+- **Contact** - Contact form
 
-### Clone
+## Quick Start
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+### Prerequisites
 
-### Development
+- Node.js 18+ and npm (or pnpm)
+- MongoDB database (local or cloud)
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URI` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+### Installation
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+```bash
+# Install dependencies
+pnpm install
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your MongoDB URI and Payload secret
+
+# Generate TypeScript types
+pnpm run generate:types
+
+# Seed initial data (optional)
+pnpm run seed
+
+# Start development server
+pnpm dev
+```
+
+Visit `http://localhost:3000` to see the site and `http://localhost:3000/admin` to access the CMS admin panel.
+
+## Initial Setup
+
+See [SETUP.md](./SETUP.md) for detailed instructions on configuring the CMS content.
 
 #### Docker (Optional)
 
