@@ -11,6 +11,33 @@ export const Home: GlobalConfig = {
   },
   fields: [
     {
+      name: 'seo',
+      type: 'group',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          admin: {
+            description: 'SEO title (leave blank to use hero title)',
+          },
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          admin: {
+            description: 'SEO meta description',
+          },
+        },
+        {
+          name: 'keywords',
+          type: 'text',
+          admin: {
+            description: 'Comma-separated keywords',
+          },
+        },
+      ],
+    },
+    {
       name: 'heroTitle',
       type: 'text',
       required: false,

@@ -1,4 +1,23 @@
 import { getOnlinePartnership } from '@/lib/cms'
+import type { Metadata } from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const partnershipData = await getOnlinePartnership()
+
+  const title = partnershipData.seo?.title || partnershipData.pageTitle || 'Online Course'
+  const description =
+    partnershipData.seo?.description ||
+    'Flexible online driver education through our partnership with Aceable Inc. Self-paced learning for busy families.'
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: `${title} | Myers Driving Academy`,
+      description,
+    },
+  }
+}
 
 export default async function OnlineCoursePage() {
   const partnershipData = await getOnlinePartnership()

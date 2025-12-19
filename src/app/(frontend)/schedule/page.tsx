@@ -1,4 +1,24 @@
-import { getOpenClasses } from '@/lib/cms'
+import { getOpenClasses, getSchedule } from '@/lib/cms'
+import type { Metadata } from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const schedule = await getSchedule()
+
+  const title = schedule.seo?.title || schedule.pageTitle || 'Class Schedule'
+  const description =
+    schedule.seo?.description ||
+    schedule.pageDescription ||
+    'View upcoming in-person driver education classes at Myers Driving Academy. Monthly sessions with limited seats available in Plymouth, Ohio.'
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: `${title} | Myers Driving Academy`,
+      description,
+    },
+  }
+}
 
 export default async function SchedulePage() {
   const classes = await getOpenClasses()

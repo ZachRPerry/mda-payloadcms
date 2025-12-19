@@ -11,6 +11,20 @@ export const Registration: GlobalConfig = {
   },
   fields: [
     {
+      name: 'seo',
+      type: 'group',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+        },
+      ],
+    },
+    {
       name: 'pageTitle',
       type: 'text',
       required: true,

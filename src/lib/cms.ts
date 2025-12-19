@@ -4,12 +4,14 @@ import config from '@payload-config'
 import type {
   Class,
   Config,
+  Contact,
   Footer,
   Header,
   Home,
   OnlinePartnership,
   Process,
   Registration,
+  Schedule,
 } from '@/payload-types'
 
 const getPayloadClient = async () => getPayload({ config })
@@ -86,4 +88,32 @@ export const getOpenClasses = unstable_cache(
   },
   ['classes'],
   { revalidate: false, tags: ['classes'] },
+)
+
+export const getSchedule = unstable_cache(
+  async () => {
+    const payload = await getPayloadClient()
+    return (await payload.findGlobal({
+      slug: 'schedule' as keyof Config['globals'],
+    })) as Schedule
+  },
+  ['schedule'],
+  {
+    revalidate: false,
+    tags: ['schedule'],
+  },
+)
+
+export const getContact = unstable_cache(
+  async () => {
+    const payload = await getPayloadClient()
+    return (await payload.findGlobal({
+      slug: 'contact' as keyof Config['globals'],
+    })) as Contact
+  },
+  ['contact'],
+  {
+    revalidate: false,
+    tags: ['contact'],
+  },
 )

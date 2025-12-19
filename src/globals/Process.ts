@@ -11,6 +11,20 @@ export const Process: GlobalConfig = {
   },
   fields: [
     {
+      name: 'seo',
+      type: 'group',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+        },
+      ],
+    },
+    {
       name: 'heroTitle',
       type: 'text',
       required: true,

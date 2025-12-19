@@ -47,6 +47,13 @@ async function seed() {
     await payload.updateGlobal({
       slug: 'home',
       data: {
+        seo: {
+          title: 'Myers Driving Academy | Ohio Driver Education Since 1996',
+          description:
+            'Family-owned Ohio driver education since 1996. Expert instruction, state-certified instructors, flexible scheduling. Helping teens become safe, confident drivers.',
+          keywords:
+            'Ohio driving school, Plymouth Ohio drivers ed, Ohio driver education, teen driving lessons, driver training Ohio, BMV approved driver education',
+        },
         heroTitle: 'Helping Ohio Teens Become Safe, Confident Drivers',
         heroDescription: 'Family owned driving instruction trusted by parents for over 29 years',
         heroCtaLabel: 'View Upcoming Classes',
@@ -110,6 +117,11 @@ async function seed() {
     await payload.updateGlobal({
       slug: 'process',
       data: {
+        seo: {
+          title: 'How It Works | Driver Education Process',
+          description:
+            "Learn the step-by-step process for getting your Ohio driver's license. Choose between online or in-person instruction with expert guidance.",
+        },
         heroTitle: 'How It Works',
         heroDescription: 'Two ways to learn—choose your path and follow the steps.',
         inPersonSteps: [
@@ -202,6 +214,11 @@ async function seed() {
     await payload.updateGlobal({
       slug: 'registration',
       data: {
+        seo: {
+          title: 'Registration Forms | Enroll in Driver Education',
+          description:
+            'Download registration forms for Myers Driving Academy. Class registration and behind-the-wheel training forms available for download.',
+        },
         pageTitle: 'Registration',
         pageDescription: 'Download the appropriate form below to begin your registration process.',
         classRegistrationForm: {
@@ -222,10 +239,46 @@ async function seed() {
     await payload.updateGlobal({
       slug: 'online-partnership',
       data: {
+        seo: {
+          title: 'Online Driver Education | Flexible Self-Paced Learning',
+          description:
+            'Complete your Ohio driver education online through our trusted partnership with Aceable Inc. Self-paced learning perfect for busy families.',
+        },
         pageTitle: 'Online Course Partnership',
         partnerName: 'Aceable Inc',
         partnerLink: 'http://go.aceable.com/aff_c?offer_id=10&aff_id=1022',
         ctaButtonText: 'Visit Aceable Inc Today',
+      },
+    })
+
+    // Seed Schedule
+    console.log('Creating schedule page...')
+    await payload.updateGlobal({
+      slug: 'schedule',
+      data: {
+        seo: {
+          title: 'Class Schedule | Upcoming Driver Education Classes',
+          description:
+            'View upcoming in-person driver education classes at Myers Driving Academy in Plymouth, Ohio. Monthly sessions with limited seats available.',
+        },
+        pageTitle: 'Upcoming Classes',
+        pageDescription:
+          'View our schedule and register for an upcoming in-person driver education class',
+      },
+    })
+
+    // Seed Contact
+    console.log('Creating contact page...')
+    await payload.updateGlobal({
+      slug: 'contact',
+      data: {
+        seo: {
+          title: 'Contact Us | Myers Driving Academy',
+          description:
+            'Contact Myers Driving Academy in Plymouth, Ohio. Send us a message with your questions about driver education classes and programs.',
+        },
+        pageTitle: 'Contact Us',
+        pageDescription: 'Get in touch with questions about our driver education programs',
       },
     })
 

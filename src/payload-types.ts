@@ -98,6 +98,8 @@ export interface Config {
     registration: Registration;
     'online-partnership': OnlinePartnership;
     home: Home;
+    schedule: Schedule;
+    contact: Contact;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -106,6 +108,8 @@ export interface Config {
     registration: RegistrationSelect<false> | RegistrationSelect<true>;
     'online-partnership': OnlinePartnershipSelect<false> | OnlinePartnershipSelect<true>;
     home: HomeSelect<false> | HomeSelect<true>;
+    schedule: ScheduleSelect<false> | ScheduleSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
   };
   locale: null;
   user: User & {
@@ -511,6 +515,10 @@ export interface Footer {
  */
 export interface Process {
   id: string;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
   heroTitle: string;
   heroDescription?: string | null;
   /**
@@ -561,6 +569,10 @@ export interface Process {
  */
 export interface Registration {
   id: string;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
   pageTitle: string;
   pageDescription?: string | null;
   classRegistrationForm: {
@@ -582,6 +594,10 @@ export interface Registration {
  */
 export interface OnlinePartnership {
   id: string;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
   pageTitle: string;
   partnerName: string;
   partnerLink: string;
@@ -610,6 +626,20 @@ export interface OnlinePartnership {
  */
 export interface Home {
   id: string;
+  seo?: {
+    /**
+     * SEO title (leave blank to use hero title)
+     */
+    title?: string | null;
+    /**
+     * SEO meta description
+     */
+    description?: string | null;
+    /**
+     * Comma-separated keywords
+     */
+    keywords?: string | null;
+  };
   heroTitle?: string | null;
   heroDescription?: string | null;
   heroCtaLabel?: string | null;
@@ -648,6 +678,36 @@ export interface Home {
         id?: string | null;
       }[]
     | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schedule".
+ */
+export interface Schedule {
+  id: string;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  pageTitle?: string | null;
+  pageDescription?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  pageTitle?: string | null;
+  pageDescription?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -694,6 +754,12 @@ export interface FooterSelect<T extends boolean = true> {
  * via the `definition` "process_select".
  */
 export interface ProcessSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
   heroTitle?: T;
   heroDescription?: T;
   inPersonSteps?:
@@ -724,6 +790,12 @@ export interface ProcessSelect<T extends boolean = true> {
  * via the `definition` "registration_select".
  */
 export interface RegistrationSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
   pageTitle?: T;
   pageDescription?: T;
   classRegistrationForm?:
@@ -749,6 +821,12 @@ export interface RegistrationSelect<T extends boolean = true> {
  * via the `definition` "online-partnership_select".
  */
 export interface OnlinePartnershipSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
   pageTitle?: T;
   partnerName?: T;
   partnerLink?: T;
@@ -763,6 +841,13 @@ export interface OnlinePartnershipSelect<T extends boolean = true> {
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+      };
   heroTitle?: T;
   heroDescription?: T;
   heroCtaLabel?: T;
@@ -798,6 +883,40 @@ export interface HomeSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schedule_select".
+ */
+export interface ScheduleSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  pageTitle?: T;
+  pageDescription?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  pageTitle?: T;
+  pageDescription?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

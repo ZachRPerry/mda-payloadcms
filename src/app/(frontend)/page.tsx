@@ -1,6 +1,33 @@
+import type { Metadata } from 'next'
+import { getHome } from '@/lib/cms'
 import Link from 'next/link'
 import React from 'react'
-import { getHome } from '@/lib/cms'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const home = await getHome()
+
+  const title =
+    home.seo?.title || home.heroTitle || 'Helping Ohio Teens Become Safe, Confident Drivers'
+  const description =
+    home.seo?.description ||
+    home.heroDescription ||
+    'Family owned driving instruction trusted by parents for over 29 years'
+  const keywords = home.seo?.keywords?.split(',').map((k) => k.trim())
+
+  return {
+    title: 'Home',
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+    },
+    twitter: {
+      title,
+      description,
+    },
+  }
+}
 
 export default async function HomePage() {
   const home = await getHome()
@@ -88,7 +115,7 @@ export default async function HomePage() {
             </div>
             <div className="hero-image">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              {heroImageUrl && <img src={heroImageUrl} alt="Hero" loading="lazy" />}
+              {heroImageUrl && <img src={heroImageUrl} alt={heroTitle} loading="lazy" />}
             </div>
           </div>
         </div>
@@ -122,7 +149,7 @@ export default async function HomePage() {
                 {option.bullets && option.bullets.length > 0 && (
                   <ul>
                     {option.bullets.map((bullet, idx) => (
-                      <li key={idx}>{bullet.text}</li>
+                      <li key={idx}>✓ {bullet.text}</li>
                     ))}
                   </ul>
                 )}

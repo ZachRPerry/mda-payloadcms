@@ -1,4 +1,24 @@
 import { getRegistration } from '@/lib/cms'
+import type { Metadata } from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const registrationData = await getRegistration()
+
+  const title = registrationData.seo?.title || registrationData.pageTitle || 'Registration'
+  const description =
+    registrationData.seo?.description ||
+    registrationData.pageDescription ||
+    'Download registration forms for Myers Driving Academy. Class registration and behind-the-wheel training forms available.'
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: `${title} | Myers Driving Academy`,
+      description,
+    },
+  }
+}
 
 export default async function RegistrationPage() {
   const registrationData = await getRegistration()
