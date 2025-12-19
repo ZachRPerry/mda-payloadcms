@@ -1,20 +1,95 @@
 import Link from 'next/link'
 import React from 'react'
+import { getHome } from '@/lib/cms'
 
 export default async function HomePage() {
+  const home = await getHome()
+
+  const heroTitle = home.heroTitle || 'Helping Ohio Teens Become Safe, Confident Drivers'
+  const heroDescription =
+    home.heroDescription || 'Family owned driving instruction trusted by parents for over 29 years'
+  const heroCtaLabel = home.heroCtaLabel || 'View Upcoming Classes'
+  const heroCtaLink = home.heroCtaLink || '/schedule'
+
+  const heroImageUrl =
+    home.heroImage && typeof home.heroImage !== 'string' ? home.heroImage?.url : undefined
+
+  const features = home.features?.length
+    ? home.features
+    : [
+        {
+          icon: '❤️',
+          title: 'Family-Owned & Local',
+          description: 'Personalized instruction from people who care',
+        },
+        {
+          icon: '✓',
+          title: 'State-Certified Instructors',
+          description: 'Experienced, patient, and safety-focused',
+        },
+        {
+          icon: '📅',
+          title: 'Classes Fill Fast',
+          description: 'Monthly sessions with limited seats',
+        },
+      ]
+
+  const learningOptions = home.learningOptions?.length
+    ? home.learningOptions
+    : [
+        {
+          title: 'Online Course',
+          bullets: [
+            { text: 'Self-paced' },
+            { text: 'Flexible for busy families' },
+            { text: 'Includes in-car driving lesson' },
+          ],
+          ctaLabel: 'Learn More',
+          ctaLink: '/online-course',
+        },
+        {
+          title: 'In-Person Classes',
+          bullets: [
+            { text: 'Structured classroom environment' },
+            { text: 'Great for hands-on learners' },
+            { text: 'Includes in-car driving lessons' },
+          ],
+          ctaLabel: 'Learn More',
+          ctaLink: '/schedule',
+        },
+      ]
+
+  const steps = home.steps?.length
+    ? home.steps
+    : [
+        {
+          stepNumber: 1,
+          title: 'Choose Your Class Type',
+          description: 'Pick online or in-person instruction',
+        },
+        {
+          stepNumber: 2,
+          title: 'Register & Submit Forms',
+          description: 'Complete coursework and schedule drives',
+        },
+      ]
+
   return (
     <div className="home">
       <section className="hero">
         <div className="container">
           <div className="hero-content">
             <div className="hero-text">
-              <h1>Helping Ohio Teens Become Safe, Confident Drivers</h1>
-              <p>Family owned driving instruction trusted by parents for over 29 years</p>
-              <Link href="/schedule" className="btn btn-primary">
-                View Upcoming Classes
+              <h1>{heroTitle}</h1>
+              <p>{heroDescription}</p>
+              <Link href={heroCtaLink} className="btn btn-primary">
+                {heroCtaLabel}
               </Link>
             </div>
-            <div className="hero-image">{/* Placeholder for hero image */}</div>
+            <div className="hero-image">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {heroImageUrl && <img src={heroImageUrl} alt="Hero" loading="lazy" />}
+            </div>
           </div>
         </div>
       </section>
@@ -23,21 +98,13 @@ export default async function HomePage() {
         <div className="container">
           <h2>Why Parents Choose Us</h2>
           <div className="features">
-            <div className="feature">
-              <div className="feature-icon">❤️</div>
-              <h3>Family-Owned & Local</h3>
-              <p>Personalized instruction from people who care</p>
-            </div>
-            <div className="feature">
-              <div className="feature-icon">✓</div>
-              <h3>State-Certified Instructors</h3>
-              <p>Experienced, patient, and safety-focused</p>
-            </div>
-            <div className="feature">
-              <div className="feature-icon">📅</div>
-              <h3>Classes Fill Fast</h3>
-              <p>Monthly sessions with limited seats</p>
-            </div>
+            {features.map((feature, index) => (
+              <div key={index} className="feature">
+                {feature.icon && <div className="feature-icon">{feature.icon}</div>}
+                <h3>{feature.title}</h3>
+                {feature.description && <p>{feature.description}</p>}
+              </div>
+            ))}
           </div>
           <Link href="/schedule" className="btn btn-secondary">
             View Class Schedule
@@ -49,28 +116,23 @@ export default async function HomePage() {
         <div className="container">
           <h2>Two Ways to Learn</h2>
           <div className="options">
-            <div className="option-card">
-              <h3>Online Course</h3>
-              <ul>
-                <li>✓ Self-paced</li>
-                <li>✓ Flexible for busy families</li>
-                <li>✓ Includes in-car driving lesson</li>
-              </ul>
-              <Link href="/online-course" className="btn btn-primary">
-                Learn More
-              </Link>
-            </div>
-            <div className="option-card">
-              <h3>In-Person Classes</h3>
-              <ul>
-                <li>✓ Structured classroom environment</li>
-                <li>✓ Great for hands-on learners</li>
-                <li>✓ Includes in-car driving lessons</li>
-              </ul>
-              <Link href="/schedule" className="btn btn-primary">
-                Learn More
-              </Link>
-            </div>
+            {learningOptions.map((option, index) => (
+              <div key={index} className="option-card">
+                <h3>{option.title}</h3>
+                {option.bullets && option.bullets.length > 0 && (
+                  <ul>
+                    {option.bullets.map((bullet, idx) => (
+                      <li key={idx}>{bullet.text}</li>
+                    ))}
+                  </ul>
+                )}
+                {option.ctaLink && option.ctaLabel && (
+                  <Link href={option.ctaLink} className="btn btn-primary">
+                    {option.ctaLabel}
+                  </Link>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -79,16 +141,13 @@ export default async function HomePage() {
         <div className="container">
           <h2>How It Works</h2>
           <div className="steps">
-            <div className="step">
-              <div className="step-number">1</div>
-              <h3>Choose Your Class Type</h3>
-              <p>Complete your spot</p>
-            </div>
-            <div className="step">
-              <div className="step-number">2</div>
-              <h3>Register & Submit Forms</h3>
-              <p>Complete coursework + Driving</p>
-            </div>
+            {steps.map((step, index) => (
+              <div key={index} className="step">
+                {step.stepNumber && <div className="step-number">{step.stepNumber}</div>}
+                <h3>{step.title}</h3>
+                {step.description && <p>{step.description}</p>}
+              </div>
+            ))}
           </div>
         </div>
       </section>

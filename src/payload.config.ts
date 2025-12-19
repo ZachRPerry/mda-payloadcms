@@ -15,6 +15,7 @@ import { Footer } from './globals/Footer'
 import { Process } from './globals/Process'
 import { Registration } from './globals/Registration'
 import { OnlinePartnership } from './globals/OnlinePartnership'
+import { Home } from './globals/Home'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -27,7 +28,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Classes, ContactSubmissions],
-  globals: [Header, Footer, Process, Registration, OnlinePartnership],
+  globals: [Header, Footer, Process, Registration, OnlinePartnership, Home],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

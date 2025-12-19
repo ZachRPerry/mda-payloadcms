@@ -3,8 +3,10 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import type {
   Class,
+  Config,
   Footer,
   Header,
+  Home,
   OnlinePartnership,
   Process,
   Registration,
@@ -55,6 +57,16 @@ export const getOnlinePartnership = unstable_cache(
   },
   ['online-partnership'],
   { revalidate: false, tags: ['online-partnership'] },
+)
+
+export const getHome = unstable_cache(
+  async () => {
+    const payload = await getPayloadClient()
+    const data = await payload.findGlobal({ slug: 'home' as keyof Config['globals'] })
+    return data as Home
+  },
+  ['home'],
+  { revalidate: false, tags: ['home'] },
 )
 
 export const getOpenClasses = unstable_cache(

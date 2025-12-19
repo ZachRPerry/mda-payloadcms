@@ -20,6 +20,7 @@ A modern, content-managed website for Myers Driving Academy built with [Payload 
 - **Online Course** - Aceable partnership information
 - **Registration** - Downloadable registration forms
 - **Contact** - Contact form
+- **Home** - Hero, features, learning options, steps (managed via CMS)
 
 ## Quick Start
 

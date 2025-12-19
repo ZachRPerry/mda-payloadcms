@@ -42,6 +42,69 @@ async function seed() {
       },
     })
 
+    // Seed Home
+    console.log('Creating home page...')
+    await payload.updateGlobal({
+      slug: 'home',
+      data: {
+        heroTitle: 'Helping Ohio Teens Become Safe, Confident Drivers',
+        heroDescription: 'Family owned driving instruction trusted by parents for over 29 years',
+        heroCtaLabel: 'View Upcoming Classes',
+        heroCtaLink: '/schedule',
+        features: [
+          {
+            icon: '❤️',
+            title: 'Family-Owned & Local',
+            description: 'Personalized instruction from people who care',
+          },
+          {
+            icon: '✓',
+            title: 'State-Certified Instructors',
+            description: 'Experienced, patient, and safety-focused',
+          },
+          {
+            icon: '📅',
+            title: 'Classes Fill Fast',
+            description: 'Monthly sessions with limited seats',
+          },
+        ],
+        learningOptions: [
+          {
+            title: 'Online Course',
+            bullets: [
+              { text: 'Self-paced' },
+              { text: 'Flexible for busy families' },
+              { text: 'Includes in-car driving lesson' },
+            ],
+            ctaLabel: 'Learn More',
+            ctaLink: '/online-course',
+          },
+          {
+            title: 'In-Person Classes',
+            bullets: [
+              { text: 'Structured classroom environment' },
+              { text: 'Great for hands-on learners' },
+              { text: 'Includes in-car driving lessons' },
+            ],
+            ctaLabel: 'Learn More',
+            ctaLink: '/schedule',
+          },
+        ],
+        steps: [
+          {
+            stepNumber: 1,
+            title: 'Choose Your Class Type',
+            description: 'Pick online or in-person instruction',
+          },
+          {
+            stepNumber: 2,
+            title: 'Register & Submit Forms',
+            description: 'Complete coursework and schedule drives',
+          },
+        ],
+      },
+    })
+
     // Seed Process
     console.log('Creating process page...')
     await payload.updateGlobal({

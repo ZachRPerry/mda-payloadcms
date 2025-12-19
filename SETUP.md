@@ -56,7 +56,15 @@ BLOB_READ_WRITE_TOKEN=vercel-generated-token
    - Class Registration Form (PDF)
    - Behind The Wheel Training Form (PDF)
 
-### 4. Registration Page
+### 4. Home Page
+
+1. Go to **Globals → Home**
+2. Fill in hero title/description/CTA and optional hero image
+3. Add Features (icon, title, description)
+4. Add Learning Options (title, bullet list, CTA label/link)
+5. Add Steps (step number, title, description)
+
+### 5. Registration Page
 
 1. Go to **Globals → Registration**
 2. Set page title: "Registration"
@@ -69,7 +77,7 @@ BLOB_READ_WRITE_TOKEN=vercel-generated-token
    - Description: "This form is for students who will need 8 hour BEHIND THE WHEEL TRAINING. Please print the form. Fill it in completely and mail to Myers Driving Academy PO BOX 254 Plymouth, OH 44865 with at least a $200.00 deposit. We accept checks, money order, or debit/credit cards (in person only)"
    - Select the uploaded Behind The Wheel PDF from Media
 
-### 5. Online Partnership Page
+### 6. Online Partnership Page
 
 1. Go to **Globals → Online Partnership**
 2. Set page title: "Online Course Partnership"
@@ -87,7 +95,7 @@ BLOB_READ_WRITE_TOKEN=vercel-generated-token
 
 6. CTA Button Text: "Visit Aceable Inc Today"
 
-### 6. Process Page
+### 7. Process Page
 
 1. Go to **Globals → Process**
 2. Set hero title: "How It Works"
@@ -98,7 +106,7 @@ BLOB_READ_WRITE_TOKEN=vercel-generated-token
    - **Step 2**: Register & Submit Forms
      - Description: "Complete coursework and driving instruction to earn your certificate"
 
-### 7. Add Classes
+### 8. Add Classes
 
 1. Go to **Collections → Classes**
 2. Click "Create New"
