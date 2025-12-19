@@ -41,7 +41,7 @@ export default async function OnlineCoursePage() {
             )}
 
             {partnershipData.partnerLink && (
-              <div className="cta-section">
+              <div className="cta-card">
                 <a
                   href={partnershipData.partnerLink}
                   className="btn btn-primary btn-large"
