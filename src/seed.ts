@@ -1,8 +1,13 @@
-import 'dotenv/config'
+import { config as dotenvConfig } from 'dotenv'
 import { getPayload } from 'payload'
-import config from './payload.config'
+
+// Load the appropriate .env file based on NODE_ENV
+dotenvConfig({
+  path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env',
+})
 
 async function seed() {
+  const config = (await import('./payload.config')).default
   const payload = await getPayload({ config })
 
   console.log('Seeding database...')
