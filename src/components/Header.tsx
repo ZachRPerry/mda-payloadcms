@@ -10,10 +10,10 @@ export default async function Header() {
         <div className="header-content">
           <Link href="/" className="logo-link">
             <img
-              src="./mda_logo_nag.png"
-              alt="Myers Driving Academy"
+              src="/myerslogo.png"
+              alt="Myers Driving Academy Logo"
               className="logo"
-              style={{ height: '50px', width: 'auto' }}
+              style={{ height: '70px', width: 'auto' }}
             />
           </Link>
 

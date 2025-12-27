@@ -1,17 +1,18 @@
 :root {
-  /* Brand Colors */
-  --primary-navy: #0a2540;
-  --primary-green: #278a3f;
-  --primary-green-light: #3fae5a;
-  --primary-green-dark: #1e6f33;
-  /* Legacy tokens used across styles */
-  --primary-purple: #0a2540;
+  /* Brand Colors - Myers Driving Academy */
+  --primary-purple: #6c1ca1;
+  --accent-coral: #ff7a6c;
+  --primary-navy: #6c1ca1; /* fallback for legacy */
+  --primary-green: #6c1ca1; /* fallback for legacy */
+  --primary-green-light: #b47fd6;
+  --primary-green-dark: #4a1372;
   --light-purple: #e5e7eb;
-  --light-bg: #e5e7eb;
+  --light-bg: #f9f6fb;
 
   /* Text Colors */
-  --text-dark: #1a2332;
-  --text-light: #666666;
+  --text-dark: #3d1860;
+  --text-light: #6c1ca1;
+  --accent-text: #ff7a6c;
   --white: #ffffff;
 
   /* Spacing & Layout */

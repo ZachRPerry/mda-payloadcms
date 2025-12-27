@@ -1,5 +1,6 @@
 import { getOnlinePartnership } from '@/lib/cms'
 import type { Metadata } from 'next'
+import { OnlineCourseRichText } from '@/components/OnlineCourseRichText'
 
 export async function generateMetadata(): Promise<Metadata> {
   const partnershipData = await getOnlinePartnership()
@@ -34,10 +35,9 @@ export default async function OnlineCoursePage() {
         <div className="container">
           <div className="content-card">
             {partnershipData.description && (
-              <div
-                className="partnership-description"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(partnershipData.description) }}
-              />
+              <div className="partnership-description">
+                <OnlineCourseRichText content={partnershipData.description} />
+              </div>
             )}
 
             {partnershipData.partnerLink && (
